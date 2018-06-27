@@ -9,6 +9,9 @@
   "author": "Windiana",
   "license": "ISC",
   "dependencies": {
-    "sleep": "^5.1.1"
+    "fs": "0.0.1-security",
+    "python": "0.0.4",
+    "sleep": "^5.1.1",
+    "sqlite3": "^4.0.1"
   }
 }
