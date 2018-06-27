@@ -1,17 +1,44 @@
 const fs = require('fs');
-var sleep = require('sleep');
-
-function readFilePromise() {
-  // psst, the promise should be around here...
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds) {
+      break;
+    }
+  }
 }
 
-function matchParentsWithChildrens(parentFileName, childrenFileName) {
-  // your code here... (p.s. readFilePromise function(s) should be around here..)
+function match_data(parent_file, children_file) {
+  return new Promise((resolve, reject)=>{
+    fs.readFile(parent_file, 'utf8', function(err, parents_file){
+      if(err) {reject('error')}
+      const parents = JSON.parse(parents_file)
+      sleep(1000);
+      fs.readFile(children_file, 'utf8', function(err, childrens_file){
+        if(err) {reject('error')}
+        const childrens = JSON.parse(childrens_file)
+        sleep(1000);
+        for (let i = 0; i < parents.length; i++) {
+          var childrenArr = [];
+          for (let j = 0; j < childrens.length; j++) {
+            if (parents[i].last_name === childrens[j].family) {
+              childrenArr.push(childrens[j].full_name);
+            }
+          }
+          parents[i].children = childrenArr;
+          resolve(parents);
+        }
+      })
+    })
+
+  })
 }
 
-matchParentsWithChildrens('./parents.json', './childrens.json');
+match_data('./parents.json', './childrens.json')
+.then(response =>{
+  console.log(response);
+})
+.catch(response =>{
+  console.log(response);
+})
 console.log("Notification : Data sedang diproses !");
-
-// for Release 2
-matchParentsWithChildrens('./parents.json', './not_a_real_file.json');
-matchParentsWithChildrens('./not_a_real_file.json', './also_not_a_real_file.json');
