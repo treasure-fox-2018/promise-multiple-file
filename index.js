@@ -5,11 +5,11 @@ const util = require('util');
 function readFilePromise(file_name) {
   // psst, the promise should be around here...
   return new Promise(function(resolve, reject) {
-    fs.readFile(file_name, (err, parents) => {
+    fs.readFile(file_name, (err, data) => {
       if (err) {
         reject(err);
       } else {
-        resolve(JSON.parse(parents));
+        resolve(JSON.parse(data));
       }
     });
   });
@@ -41,9 +41,13 @@ function matchParentsWithChildrens(parentFileName, childrenFileName) {
             arrCurrentChildren.push(children_data[j].full_name)
           }
         }
-        currentParent.children = arrCurrentChildren
+        currentParent.children = arrCurrentChildren;
       }
       console.log(util.inspect(parent_data, false, null));
+    })
+    .catch((err) => {
+      console.log("Oops! Something's wrong during reading the data");
+      console.log(err);
     })
   })
   .catch((err) => {
