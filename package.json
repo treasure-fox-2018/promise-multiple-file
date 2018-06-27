@@ -1,7 +1,7 @@
 {
   "name": "callback_readfile",
   "version": "1.0.0",
-  "description": "",
+  "description": "promise multiple file",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,5 +10,16 @@
   "license": "ISC",
   "dependencies": {
     "sleep": "^5.1.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/treasure-fox-2018/promise-multiple-file.git"
+  },
+  "keywords": [
+    "promise"
+  ],
+  "bugs": {
+    "url": "https://github.com/treasure-fox-2018/promise-multiple-file/issues"
+  },
+  "homepage": "https://github.com/treasure-fox-2018/promise-multiple-file#readme"
 }
